@@ -6,7 +6,7 @@ import CheckoutPage from './pages/checkout/checkout.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component copy';
 import { connect } from 'react-redux';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+import { auth, createUserProfileDocument} from './firebase/firebase.utils'
 import './App.css';
 
 import { setCurrentUser }from './redux/user/user.actions';
