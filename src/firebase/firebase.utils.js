@@ -8,8 +8,7 @@ const config = {
   projectId: "crown-db-fb71c",
   storageBucket: "crown-db-fb71c.appspot.com",
   messagingSenderId: "1012823162603",
-  appId: "1:1012823162603:web:0049aa9b1046e651ef88ae",
-  measurementId: "G-3DETJP35WL"
+  appId: "1:1012823162603:web:0049aa9b1046e651ef88ae"
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -65,21 +64,28 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     };
   });
 
-  //convert trsnformedCollection array to an object
+  //convert trsnformedCollection array to an object using a reducer
   return transformedCollection.reduce((accumulator, collection) => {
     accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
   }, {})
 }
 
-
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject)
+  });
+}
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-provider.setCustomParameters({ prompt: 'select_account'});
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+googleProvider.setCustomParameters({ prompt: 'select_account'});
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;
