@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
-const PORT = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -20,9 +20,9 @@ if (process.env.NODE_ENV === 'production') {
     });
 };
 
-app.listen(PORT, error => {
+app.listen(port, error => {
     if (error) throw error;
-    console.log(`server running on port ${PORT}`)
+    console.log(`server running on port ${port}`)
 });
 
 app.post('/payment', (req, res) => {
